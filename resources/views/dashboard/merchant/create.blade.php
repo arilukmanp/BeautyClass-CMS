@@ -65,13 +65,13 @@
 					<div class="card text-center">
 						<div class="card-body">
 							<h5 class="card-title">Logo</h5>
-							<div class="profile-img p-3">
-								<img src="https://img.icons8.com/material/4ac144/256/camera.png" id="profile-pic">
+							<div class="profile-img mb-2">
+								<img src="http://riverroadrepair.com/wp-content/uploads/2019/01/logo-placeholder.jpg" id="profile-pic">
 							</div>
 							<div class="btn btn-dark">
 								<input type="file" class="file-upload" id="file-upload" 
 								name="profile_picture" accept="image/*">
-								Pilih Gambar
+								Pilih Logo
 							</div>
 						</div>
 					</div>

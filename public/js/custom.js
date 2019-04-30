@@ -47,3 +47,63 @@ function del(nim) {
 			}
 		})
 };
+
+
+// ====================== Login Area ======================
+
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+
+signUpButton.addEventListener('click', () => {
+	container.classList.add("right-panel-active");
+});
+
+signInButton.addEventListener('click', () => {
+	container.classList.remove("right-panel-active");
+});
+
+
+
+$(".toggle-password").click(function() {
+
+	$(this).toggleClass("fa-eye fa-eye-slash");
+	var input = $($(this).attr("toggle"));
+	if (input.attr("type") == "password") {
+	  input.attr("type", "text");
+	} else {
+	  input.attr("type", "password");
+	}
+  });
+
+// ================== End of Login Area ===================
+
+
+
+
+// ========================= Ripple Effect ========================
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach(button => {
+	button.addEventListener('click', function(e) {
+		let x = e.clientX;
+		let y = e.clientY;
+		let buttonTop = e.target.offsetTop;
+		let buttonLeft = e.target.offsetLeft;
+		let xInside = x - buttonLeft;
+		let yInside = y - buttonTop;
+
+		let circle = document.createElement('span');
+		circle.classList.add('circle');
+		circle.style.top = yInside + 'px';
+		circle.style.left = xInside + 'px';
+
+        this.appendChild(circle);
+        setTimeout(() => {
+            circle.remove();
+        }, 500);
+	});
+});
+
+// ==================== End of Ripple Effect =====================

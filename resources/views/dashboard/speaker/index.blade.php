@@ -13,9 +13,54 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-12">
-                    <p>Ok</p>
+            <div class="col-md-12 mx-auto">
+                <div class="col-md-3 mb-2">
+                    <div class="card-container">
+                        <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
+                        <h3>Ricky Park</h3>
+                        <p>User interface designer and <br/> front-end developer</p>
+                        <button class="btn btn_pink">Detail</button>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <div class="card-container">
+                        <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
+                        <h3>Ricky Park</h3>
+                        <p>User interface designer and <br/> front-end developer</p>
+                        <button class="btn btn_pink">Detail</button>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <div class="card-container">
+                        <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
+                        <h3>Ricky Park</h3>
+                        <p>User interface designer and <br/> front-end developer</p>
+                        <button class="btn btn_pink">Detail</button>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <div class="card-container">
+                        <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
+                        <h3>Ricky Park</h3>
+                        <p>User interface designer and <br/> front-end developer</p>
+                        <button class="btn btn_pink">Detail</button>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <div class="card-container">
+                        <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
+                        <h3>Ricky Park</h3>
+                        <p>User interface designer and <br/> front-end developer</p>
+                        <button class="btn btn_pink">Detail</button>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <div class="card-container">
+                        <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
+                        <h3>Ricky Park</h3>
+                        <p>User interface designer and <br/> front-end developer</p>
+                        <button class="btn btn_pink">Detail</button>
+                    </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group"></div>
