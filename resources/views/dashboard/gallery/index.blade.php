@@ -15,7 +15,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="block-header text-center mb-2">
-                                    <h3 class="upload-title">Upload</h3>
+                                    <form class="form-horizontal edt" action="/merchants" method="POST" enctype="multipart/form-data">
+                                        <h3 class="upload-title">Upload</h3>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Download extends Model
+class Hit extends Model
 {
     protected $fillable = [
-        'name', 'file'
+        'counter'
     ];
 }

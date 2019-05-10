@@ -18,7 +18,8 @@ class CreateDownloadsTable extends Migration
             $table->charset = 'utf8';
             $table->increments('id');
             $table->string('name');
-            $table->date('for_date');
+            $table->string('file');
+            $table->timestamps();
         });
     }
 

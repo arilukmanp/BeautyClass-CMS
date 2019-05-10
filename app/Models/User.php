@@ -12,29 +12,14 @@ class User extends Authenticatable
     use Notifiable;
     use SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'email', 'password', 'token', 'status'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password'
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -42,6 +27,31 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne('App\Models\Profile');
+    }
+
+    public function voucher()
+    {
+        return $this->hasMany('App\Models\Voucher');
+    }
+
+    public function coupon()
+    {
+        return $this->hasMany('App\Models\Coupon');
+    }
+
+    public function cashback()
+    {
+        return $this->hasMany('App\Models\Cashback');
+    }
+
+    public function presence()
+    {
+        return $this->hasOne('App\Models\Presence');
+    }
+
+    public function transaction()
+    {
+        return $this->hasOne('App\Models\Transaction');
     }
 
     public function isAdmin()

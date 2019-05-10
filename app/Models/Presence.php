@@ -3,14 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Coupon extends Model
+class Presence extends Model
 {
-    use SoftDeletes;
-    
     protected $fillable = [
-        'user_id', 'no_coupon'
+        'user_id', 'status'
     ];
 
     public function user()

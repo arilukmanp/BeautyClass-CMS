@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAboutsTable extends Migration
+class CreateHitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateAboutsTable extends Migration
      */
     public function up()
     {
-        Schema::create('abouts', function (Blueprint $table) {
+        Schema::create('hits', function (Blueprint $table) {
             $table->collation = 'utf8_general_ci';
             $table->charset = 'utf8';
-            $table->increments('id');
-            $table->string('event_name', 100);
-            $table->string('eo_name', 100);
-            $table->string('logo');
-            $table->text('app_description');
+            $table->bigIncrements('id');
+            $table->integer('counter');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreateAboutsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('abouts');
+        Schema::dropIfExists('hits');
     }
 }

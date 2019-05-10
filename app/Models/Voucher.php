@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Transaction extends Model
+class Voucher extends Model
 {
-    use SoftDeletes;
-    
+    protected $timestamps = false;
+
     protected $fillable = [
-        'merchant_id', 'no_nota', 'total'
+        'merchant_id', 'name', 'description', 'expire', 'min_purchase', 'cashback', 'max_cashback', 'photo'
     ];
 
     public function user()
@@ -20,6 +19,6 @@ class Transaction extends Model
 
     public function cashback()
     {
-        return $this->hasOne('App\Models\Cashback');
+        return $this->hasMany('App\Models\Cashback');
     }
 }
