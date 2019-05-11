@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Speaker extends Model
 {
-    protected $timestamps = false;
+    public $timestamps = false;
     
     protected $fillable = [
         'name', 'photo', 'description'

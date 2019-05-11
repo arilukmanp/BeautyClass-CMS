@@ -1,14 +1,14 @@
 @extends('layouts.master')
 
-@section('title', 'Add Participant')
+@section('title', 'Profil Mitra')
 
 @section('content')
 <div class="block-content">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="block-header bttl">
-				<h3>Participant Profile</h3>
-				<a href="/participants/{{$participant->id}}/edit" class="btn btn_yellow btn-md pull-right"><i class="fas fa-pencil-alt btn-xs"></i> Edit Profile</a>
+				<h3>Profil Mitra</h3>
+				<a href="/{{Request::segment(1)}}/{{$merchant->id}}/edit" class="btn btn_yellow btn-md pull-right"><i class="fas fa-pencil-alt btn-xs"></i> Edit Profil</a>
 			</div>
 		</div>
 	</div>
@@ -17,37 +17,29 @@
 		<div class="col-md-10">
 			<div class="row">
 				<div class="col-md-12 col-xs-12">
-					<label class="col-xs-6 col-md-4">Fullname <span style="float:right;">:</span></label>
-					<p class="col-xs-6 col-md-8">{{ $participant->profile->name }}</p>
+					<label class="col-xs-6 col-md-4">Nama Mitra <span style="float:right;">:</span></label>
+					<p class="col-xs-6 col-md-8">{{ $merchant->profile->name }}</p>
 				</div>
 				<div class="col-md-12 col-xs-12">
-					<label class="col-xs-6 col-md-4">Email <span style="float:right;">:</span></label>
-					<p class="col-xs-6 col-md-8">{{ $participant->email }}</p>
+					<label class="col-xs-6 col-md-4">Alamat Email <span style="float:right;">:</span></label>
+					<p class="col-xs-6 col-md-8">{{ $merchant->email }}</p>
 				</div>
 				<div class="col-md-12 col-xs-12">
-					<label class="col-xs-6 col-md-4">Phone Number <span style="float:right;">:</span></label>
-					<p class="col-xs-6 col-md-8">{{ $participant->profile->phone }}</p>
+					<label class="col-xs-6 col-md-4">Nomor Telepon <span style="float:right;">:</span></label>
+					<p class="col-xs-6 col-md-8">{{ $merchant->profile->phone }}</p>
 				</div>
 				<div class="col-md-12 col-xs-12">
-					<label class="col-xs-6 col-md-4">Place of Birth <span style="float:right;">:</span></label>
-					<p class="col-xs-6 col-md-8">@if($participant->profile->place_of_birth == null) - @else {{ $participant->profile->place_of_birth }} @endif</p>
-				</div>
-				<div class="col-md-12 col-xs-12">
-					<label class="col-xs-6 col-md-4">Date of Birth <span style="float:right;">:</span></label>
-					<p class="col-xs-6 col-md-8">@if($participant->profile->date_of_birth == null) - @else {{ date("d F Y", strtotime($participant->profile->date_of_birth)) }} @endif</p>
-				</div>
-				<div class="col-md-12 col-xs-12">
-					<label class="col-xs-6 col-md-4">Address <span style="float:right;">:</span></label>
-					<p class="col-xs-6 col-md-8">@if($participant->profile->address == null) - @else {{ $participant->profile->address }} @endif</p>
+					<label class="col-xs-6 col-md-4">Alamat Kantor <span style="float:right;">:</span></label>
+					<p class="col-xs-6 col-md-8">@if($merchant->profile->address == null) - @else {{ $merchant->profile->address }} @endif</p>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-2 order-first">
 			<div class="row">
-				@if($participant->profile->photo != null)
+				@if($merchant->profile->photo != null)
 					<div class="col-xs-12 col-md-12">
 						<a href="" data-toggle="modal" data-target="#myModal" class="mx-auto thumbnail avatar-photo">
-							<img src="{{ asset('storage/profiles/'.$participant->profile->photo) }}" class="img-responsive" alt="Photo">
+							<img src="{{ asset('storage/profiles/'.$merchant->profile->photo) }}" class="img-responsive" alt="Photo">
 						</a>
 					</div>
 					<div id="myModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="background-color:#00000040">
@@ -55,7 +47,7 @@
 						  	<div class="modal-content">
 								<div class="modal-body" style="padding-top:8px">
 										<button type="button" class="close" data-dismiss="modal" style="font-size:30px; margin-bottom:5px;"><span aria-hidden="true">&times;</span></button>
-									<img src="{{ asset('storage/profiles/'.$participant->profile->photo) }}" class="img-responsive">
+									<img src="{{ asset('storage/profiles/'.$merchant->profile->photo) }}" class="img-responsive">
 							  	</div>
 							</div>
 						</div>

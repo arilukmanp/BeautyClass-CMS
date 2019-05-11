@@ -7,7 +7,7 @@ use App\Models\Hit;
 use App\Models\User;
 use App\Models\Speaker;
 use App\Models\Gallery;
-// use App\Models\Voucher;
+use App\Models\Voucher;
 use App\Models\Download;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -24,16 +24,26 @@ class HomeController extends Controller
         $participant = User::where('role', 1)->count();
         $merchant    = User::where('role', 2)->count();
         $speaker     = Speaker::count();
-        // $voucher     = Voucher::count();
+        $voucher     = Voucher::count();
         $gallery     = Gallery::count();
         $download    = Download::count();
         $transaction = Transaction::count();
 
-        if (!Gate::allows('isEO')) {
+        // if (!Gate::allows('isEO')) {
             // return abort(403);
-            return view('dashboard.home.index', ['avatar' => $ava]);
-        }
+        //     return view('dashboard.home.index', ['avatar' => $ava]);
+        // }
 
-        return view('dashboard.home.index', ['avatar' => $ava]);
+        return view('dashboard.home.index', [
+            'avatar'       => $ava,
+            'hits'         => $hits,
+            'participants' => $participant,
+            'merchants'    => $merchant,
+            'speakers'     => $speaker,
+            'vouchers'     => $voucher,
+            'gallery'      => $gallery,
+            'downloads'    => $download,
+            'transactions' => $transaction
+        ]);
     }
 }

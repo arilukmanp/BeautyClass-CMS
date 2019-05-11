@@ -42,6 +42,8 @@ class ParticipantController extends Controller
 
     public function store(Request $request)
     {
+        $url = $request->path();
+        
         $this->validate($request, [
             'email'    => 'required|unique:users'
         ]);
@@ -68,16 +70,13 @@ class ParticipantController extends Controller
 
         Mail::to($user->email)->send(new userRegistered($user));
 
-        return redirect('participants/all');
+        return redirect($url)->with('success', 'Berhasil Menambahkan Data');
     }
 
     public function show($id)
     {
         $ava  = Auth::user()->profile->photo;
-        $data = User::find($id);
-
-        if(!$data)
-            abort(404);
+        $data = User::findOrFail($id);
 
         return view('dashboard.participant.single', ['participant' => $data, 'avatar' => $ava]);
     }
@@ -85,16 +84,15 @@ class ParticipantController extends Controller
     public function edit($id)
     {
         $ava  = Auth::user()->profile->photo;
-        $data = User::find($id);
-
-        if(!$data)
-            abort(404);
+        $data = User::findOrFail($id);
 
         return view('dashboard.participant.edit', ['participant' => $data, 'avatar' => $ava]);
     }
 
     public function update(Request $request, $id)
     {
+        $url = $request->path();
+        
         $this->validate($request, [
             'email'    => 'required'
         ]);
@@ -132,34 +130,13 @@ class ParticipantController extends Controller
         $user->email = $request->email;
         $user->save();
 
-        return redirect('participants/'.$id);
+        return redirect($url)->with('success', 'Berhasil Memperbarui Data');
     }
 
     public function destroy($id)
     {
-        $data = User::find($id);
-        $data->delete();
+        User::find($id)->delete();
 
-        return redirect('participants/all');
-    }
-
-    public function tes()
-    {
-        if(isset($_POST["image"]))
-{
- $data = $_POST["image"];
-
- $image_array_1 = explode(";", $data);
-
- $image_array_2 = explode(",", $image_array_1[1]);
-
- $data = base64_decode($image_array_2[1]);
-
- $imageName = time() . '.png';
-
- file_put_contents($imageName, $data);
-
- echo '<img src="'.$imageName.'" class="img-thumbnail" />';
-}
+        return back();
     }
 }

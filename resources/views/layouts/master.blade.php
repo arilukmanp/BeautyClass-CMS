@@ -46,13 +46,13 @@
 									@endif
 								</a>
 								<ul class="dropdown-menu">
-									<li><a href="/" target="_blank"><i class="fas fa-desktop"></i><span>&nbsp;&nbsp; Front Page</span></a></li>
+									<li><a href="/" target="_blank"><i class="fas fa-desktop"></i><span>&nbsp;&nbsp; Halaman Depan</span></a></li>
                                     <li class="divider visible-lg"></li>
-									<li><a href="/account"><i class="fas fa-user-cog"></i><span>&nbsp;&nbsp; Account</span></a></li>
-									<li><a href="/settings"><i class="fas fa-cog"></i><span>&nbsp;&nbsp; Settings</span></a></li>
+									<li><a href="/account"><i class="fas fa-user-cog"></i><span>&nbsp;&nbsp; Akun</span></a></li>
+									<li><a href="/settings"><i class="fas fa-cog"></i><span>&nbsp;&nbsp; Pengaturan</span></a></li>
 									<li class="divider visible-lg"></li>
 									<li>
-										<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-ban"></i><span>&nbsp;&nbsp; Logout</span></a>
+										<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-ban"></i><span>&nbsp;&nbsp; Keluar</span></a>
 										<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 											@csrf
 										</form>
@@ -81,79 +81,79 @@
                             <li class="has_sub">
                                 <a href="">
                                     <i class="fas fa-users fa-fw"></i>
-                                    <span>Participants</span>
+                                    <span>Peserta</span>
                                 </a>
                                 <ul class="list-unstyled">
-                                    <a class="@if(Request::segment(1) == 'participants') active @endif" @if(Request::segment(1) == 'participants' && Request::segment(2) == 'all') style="color:#ED1262" @endif href="/participants/all">All Participants</a>
-									<a @if(Request::segment(1) == 'participants' && Request::segment(2) == 'unregistered') style="color:#ED1262" @endif href="/participants/unregistered">Unregistered</a>
-									<a @if(Request::segment(1) == 'participants' && Request::segment(2) == 'registered') style="color:#ED1262" @endif href="/participants/registered">Registered</a>
+                                    <a class="@if(Request::segment(1) == 'participants') active @endif" @if(Request::segment(1) == 'participants' && Request::segment(2) == 'all') style="color:#ED1262" @endif href="/participants/all">Semua Peserta</a>
+									<a @if(Request::segment(1) == 'participants' && Request::segment(2) == 'unregistered') style="color:#ED1262" @endif href="/participants/unregistered">Peserta Belum Membayar</a>
+									<a @if(Request::segment(1) == 'participants' && Request::segment(2) == 'registered') style="color:#ED1262" @endif href="/participants/registered">Peserta Telah Terdaftar</a>
                                 </ul>
 							</li>
 							<li>
 								<a class="has_sub @if(Request::segment(1) == 'merchants') subdrop @endif" href="/merchants">
 									<i class="fas fa-store-alt fa-fw"></i>
-									<span>Merchants</span>
+									<span>Mitra</span>
 								</a>
 							</li>
 							<li>
 								<a class="has_sub @if(Request::segment(1) == 'speakers') subdrop @endif" href="/speakers">
 									<i class="fas fa-microphone fa-fw"></i>
-									<span>Speakers</span>
+									<span>Pembicara</span>
 								</a>
 							</li>
 							<li class="has_sub">
                                 <a href="">
                                     <i class="fas fa-calendar-alt fa-fw"></i>
-                                    <span>Schedule</span>
+                                    <span>Jadwal</span>
                                 </a>
                                 <ul class="list-unstyled">
-                                    <a class="@if(Request::segment(1) == 'schedule') active @endif" @if(Request::segment(1) == 'schedule' && Request::segment(2) == 'day1') style="color:#ED1262" @endif href="/schedule/day1">Day 1</a>
-                                    <a @if(Request::segment(1) == 'schedule' && Request::segment(2) == 'day2') style="color:#ED1262" @endif href="/schedule/day2">Day 2</a>
+                                    <a class="@if(Request::segment(1) == 'schedule') active @endif" @if(Request::segment(1) == 'schedule' && Request::segment(2) == 'day1') style="color:#ED1262" @endif href="/schedule/day1">Hari Pertama</a>
+                                    <a @if(Request::segment(1) == 'schedule' && Request::segment(2) == 'day2') style="color:#ED1262" @endif href="/schedule/day2">Hari Kedua</a>
                                 </ul>
 							</li>
 							<li class="has_sub">
                                 <a href="">
                                     <i class="far fa-calendar-check fa-fw"></i>
-                                    <span>Attendance</span>
+                                    <span>Kehadiran</span>
                                 </a>
                                 <ul class="list-unstyled">
-                                    <a class="@if(Request::segment(1) == 'attendance') active @endif" @if(Request::segment(1) == 'attendance' && Request::segment(2) == 'day1') style="color:#ED1262" @endif href="/attendance/day1">Day 1</a>
-                                    <a @if(Request::segment(1) == 'attendance' && Request::segment(2) == 'day2') style="color:#ED1262" @endif href="/attendance/day2">Day 2</a>
+                                    <a class="@if(Request::segment(1) == 'attendance') active @endif" @if(Request::segment(1) == 'attendance' && Request::segment(2) == 'day1') style="color:#ED1262" @endif href="/attendance/day1">Hari Pertama</a>
+                                    <a @if(Request::segment(1) == 'attendance' && Request::segment(2) == 'day2') style="color:#ED1262" @endif href="/attendance/day2">Hari Kedua</a>
                                 </ul>
 							</li>
 							<li>
 								<a class="has_sub @if(Request::segment(1) == 'vouchers') subdrop @endif" href="/vouchers">
 									<i class="far fa-credit-card fa-fw"></i>
-									<span>Vouchers</span>
+									<span>Voucher</span>
 								</a>
 							</li>
 							<li class="has_sub">
 								<a href="">
 									<i class="fas fa-money-bill-wave fa-fw"></i>
-									<span>Transactions</span>
+									<span>Transaksi</span>
 								</a>
 								<ul class="list-unstyled">
-									<a class="@if(Request::segment(1) == 'transactions') active @endif" @if(Request::segment(1) == 'transactions' && Request::segment(2) == 'all') style="color:#ED1262" @endif href="/transactions/all">All Transactions</a>
+									<a class="@if(Request::segment(1) == 'transactions') active @endif" @if(Request::segment(1) == 'transactions' && Request::segment(2) == 'all') style="color:#ED1262" @endif href="/transactions/all">Semua Transaksi</a>
 									<a @if(Request::segment(1) == 'transactions' && Request::segment(2) == 'cashback') style="color:#ED1262" @endif href="/transactions/cashback">Cashback</a>
 								</ul>
 							</li>
 							<li>
 								<a class="has_sub @if(Request::segment(1) == 'coupons') subdrop @endif" href="/coupons">
 									<i class="fas fa-receipt fa-fw"></i>
-									<span>Coupons</span>
+									<span>Kupon</span>
 								</a>
 							</li>
 							@endcan
                             <li>
 								<a class="has_sub @if(Request::segment(1) == 'albums') subdrop @endif" href="/gallery">
                                     <i class="fas fa-images fa-fw"></i>
-                                    <span>Gallery</span>
+                                    <span>Galeri</span>
                                 </a>
                             </li>
                             <li>
                                 <a class="has_sub @if(Request::segment(1) == 'downloads') subdrop @endif" href="/downloads">
                                     <i class="fas fa-copy fa-fw"></i>
-                                    <span>Downloads</span>
+                                    <span>Download</span>
                                 </a>
                             </li>
 						</ul>
@@ -176,103 +176,103 @@
 						<li class="has_sub">
 							<a href="">
 								<i class="fas fa-users fa-fw"></i>
-								<span>Participants</span>
+								<span>Peserta</span>
 							</a>
 							<ul class="list-unstyled">
-								<a href="/participants/all">All Participants</a>
-								<a href="/participants/unregistered">Unregistered</a>
-								<a href="/participants/registered">Registered</a>
+								<a href="/participants/all">Semua Peserta</a>
+								<a href="/participants/unregistered">Peserta Belum Membayar</a>
+								<a href="/participants/registered">Peserta Telah Terdaftar</a>
 							</ul>
 						</li>
 						<li>
 							<a class="has_sub" href="/merchants">
 								<i class="fas fa-store-alt fa-fw"></i>
-								<span>Merchants</span>
+								<span>Mitra</span>
 							</a>
 						</li>
 						<li>
 							<a class="has_sub" href="/speakers">
 								<i class="fas fa-microphone fa-fw"></i>
-								<span>Speakers</span>
+								<span>Pembicara</span>
 							</a>
 						</li>
 						<li class="has_sub">
 							<a href="">
 								<i class="fas fa-calendar-alt fa-fw"></i>
-								<span>Schedule</span>
+								<span>Jadwal</span>
 							</a>
 							<ul class="list-unstyled">
-								<a href="/schedule/day1">Day 1</a>
-								<a href="/schedule/day2">Day 2</a>
+								<a href="/schedule/day1">Hari Pertama</a>
+								<a href="/schedule/day2">Hari Kedua</a>
 							</ul>
 						</li>
 						<li class="has_sub">
 							<a href="">
 								<i class="far fa-calendar-check fa-fw"></i>
-								<span>Attendance</span>
+								<span>Kehadiran</span>
 							</a>
 							<ul class="list-unstyled">
-								<a href="/attendance/day1">Day 1</a>
-								<a href="/attendance/day2">Day 2</a>
+								<a href="/attendance/day1">Hari Pertama</a>
+								<a href="/attendance/day2">Hari Kedua</a>
 							</ul>
 						</li>
 						<li>
 							<a class="has_sub" href="/vouchers">
 								<i class="far fa-credit-card fa-fw"></i>
-								<span>Vouchers</span>
+								<span>Voucher</span>
 							</a>
 						</li>
 						<li class="has_sub">
 							<a href="">
 								<i class="fas fa-money-bill-wave fa-fw"></i>
-								<span>Transactions</span>
+								<span>Transaksi</span>
 							</a>
 							<ul class="list-unstyled">
-								<a href="/transactions/all">All Transactions</a>
+								<a href="/transactions/all">Semua Transaksi</a>
 								<a href="/transactions/cashback">Cashback</a>
 							</ul>
 						</li>
 						<li>
 							<a class="has_sub" href="/coupons">
 								<i class="fas fa-receipt fa-fw"></i>
-								<span>Coupons</span>
+								<span>Kupon</span>
 							</a>
 						</li>
 						@endcan
 						<li>
 							<a class="has_sub" href="/gallery">
 								<i class="fas fa-images fa-fw"></i>
-								<span>Gallery</span>
+								<span>Galeri</span>
 							</a>
 						</li>
 						<li>
 							<a class="has_sub" href="/downloads">
 								<i class="fas fa-copy fa-fw"></i>
-								<span>Downloads</span>
+								<span>Download</span>
 							</a>
 						</li>
 						<li>
 							<a class="has_sub" href="/" target="_blank">
 								<i class="fas fa-desktop fa-fw"></i>
-								<span>Front Page</span>
+								<span>Halaman Depan</span>
 							</a>
 						</li>
 						<li>
 							<a class="has_sub" href="/account">
 								<i class="fas fa-user-cog fa-fw"></i>
-								<span>Account</span>
+								<span>Akun</span>
 							</a>
 						</li>
 						<li>
 							<a class="has_sub" href="/settings">
 								<i class="fas fa-cog fa-fw"></i>
-								<span>Settings</span>
+								<span>Pengaturan</span>
 							</a>
 						</li>
 						<li>
 							<a class="has_sub" href="{{ route('logout') }}">
 								<i class="fas fa-ban fa-fw"></i>
-								<span>Logout</span>
+								<span>Keluar</span>
 							</a>
 						</li>
 					</ul>
@@ -288,18 +288,12 @@
 		</div>
 	</div>
 
-<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	
+	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="{{ asset('js/croppie.js') }}"></script>
-	{{-- <script src="{{ asset('js/bootstrap.min.js') }}"></script> --}}
-	{{-- <script src="{{ asset('js/bootstrap-filestyle.min.js') }}"></script> --}}
 	<script src="{{ asset('js/dashboard-core.js') }}"></script>
-	{{-- <script src="{{ asset('js/jquery.slimscroll.js') }}"></script> --}}
 	<script src="{{ asset('js/custom.js') }}"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script> --}}
 
 	@yield('script')
 

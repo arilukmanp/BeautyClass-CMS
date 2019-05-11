@@ -1,19 +1,27 @@
 @extends('layouts.master')
 
-@section('title', 'Edit Participant')
+
+@section('title', 'Edit Data Mitra')
+
+
+@section('head')
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/croppie.css') }}">
+@endsection
+
 
 @section('content')
 <div class="block-content">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="block-header bttl">
-				<h3>Edit Participant</h3>
+				<h3>Edit Data Mitra</h3>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<form class="form-horizontal edt" action="/participants/{{ $participant->id }}" method="POST" enctype="multipart/form-data">
+			<form class="form-horizontal edt" action="/Request::segment(1)/{{ $merchant->id }}" method="POST" enctype="multipart/form-data">
+				
 				@if($errors->has('email'))
 					<div class="col-md-12">
 						<div class="alert alert-warning">
@@ -22,133 +30,195 @@
 						</div>
 					</div>
 				@endif
-				<div class="col-md-6">
-					<div class="form-group">
-						<label for="name">Fullname</label>
-						<input type="text" class="form-control" id="name" name="name" value="{{ $participant->profile->name }}" required autocomplete="off">
-					</div>
-                </div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label for="email">Email Address</label>
-						<input type="email" class="form-control" id="email" name="email" value="{{ $participant->email }}" required autocomplete="off">
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label for="place_of_birth">Place of Birth</label>
-						<input type="text" class="form-control" id="place_of_birth" name="place_of_birth" value="{{ $participant->profile->place_of_birth }}" autocomplete="off">
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label for="date_of_birth">Date of Birth</label>
-						<input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="{{ $participant->profile->date_of_birth }}" autocomplete="off">
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label for="phone">Phone Number</label>
-						<input type="text" class="form-control" id="phone" name="phone" value="{{ $participant->profile->phone }}" autocomplete="off">
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label for="photo">Photo</label>
-						<div class="input-group">
-							<input type="text" class="form-control" name="photo_old" value="{{ $participant->profile->photo }}" readonly>
-							<label class="input-group-btn">
-								<span class="btn btn-danger">
-									<span class="image-preview-input-title">Select Photo</span>
-									<input type="file" accept="image/png, image/jpeg, image/jpg" id="photo" name="photo" style="display: none;">
-								</span>
-							</label>
+				
+				<div class="col-md-9">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="name">Nama Mitra</label>
+								<input type="text" class="form-control" id="name" name="name" value="{{ $merchant->profile->name }}" required autocomplete="off">
+							</div>
+        		</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="email">Alamat Email</label>
+								<input type="email" class="form-control" id="email" name="email" value="{{ $merchant->email }}" required autocomplete="off">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="phone">Nomor Telepon</label>
+								<input type="tel" class="form-control" id="phone" name="phone" value="{{ $merchant->profile->phone }}" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group" style="border-bottom: none">
+								<label>Alamat Kantor</label>
+								<textarea class="form-control" rows="3" name="address">{{ $merchant->profile->address }}</textarea>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-12">
-					<div class="form-group">
-						<label>Address</label>
-					<textarea id="summernote_form" name="address">{{ $participant->profile->address }}</textarea>
+
+				<div class="col-md-3">
+					<div class="text-center d-flex justify-content-center p-3">
+						<label>Logo Mitra</label>
+						<div class="card text-center">
+							<div class="card-body">
+								<div class="profile-img" style="margin-top: 25px; margin-bottom: 25px">
+									<img src="{{ asset('storage/profiles/'.$merchant->profile->photo) }}" id="profile-pic">
+								</div>
+								<div class="btn btn-outline-pink">
+									<input type="file" class="file-upload" id="file-upload" 
+									name="profile_picture" accept="image/*">
+									Pilih Logo
+								</div>
+							</div>
+						</div>
 					</div>
+						
+						<!-- The Modal -->
+					<div class="modal" id="myModal" style="background-color:#00000040">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!-- Modal Header -->
+								<div class="modal-header">
+									<h4 class="modal-title">Crop Logo</h4>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+								<!-- Modal body -->
+								<div class="modal-body">
+									<div id="resizer"></div>
+									<button class="btn btn-block btn-info" id="upload-photo" > 
+									Selesai</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-12">
+					<div class="form-group"></div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-btn">
-						<a href="/participants/{{ $participant->id }}" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Batal</a>
-						<button type="submit" class="btn btn-info pull-right" value="edit" name="submit"><i class="fa fa-check"></i> &nbsp; Save</button>
-						{{ csrf_field() }}
+						<a href="{{URL::previous()}}" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Batal</a>
+						<button type="submit" id="submit" class="btn btn-info pull-right" value="edit" name="submit"><i class="fa fa-check"></i> &nbsp; Simpan</button>
+						@csrf
 						<input type="hidden" name="_method" value="PUT">
 					</div>
-                </div>
+        </div>
 			</form>
 		</div>
 	</div>
 </div>
 @endsection
 
+
 @section('script')
 	<script type="text/javascript">
-		$(document).on('click', '#close-preview', function(){ 
-			$('.image-preview').popover('hide');
-		});
-
 		$(function() {
-			var closebtn = $('<button/>', {
-				type:"button",
-				text: 'x',
-				id: 'close-preview',
-				style: 'font-size: initial;',
-			});
-			closebtn.attr("class","close pull-right");
+			var croppie = null;
+			var el = document.getElementById('resizer');
 
-
-			$('.image-preview-clear').click(function(){
-				$('.image-preview').attr("data-content","").popover('hide');
-				$('.image-preview-filename').val("");
-				$('.image-preview-clear').hide();
-				$('.image-preview-input input:file').val("");
-				$(".image-preview-input-title").text("Browse"); 
-			}); 
-
-			$(".image-preview-input input:file").change(function (){     
-				var img = $('<img/>', {
-					id: 'dynamic',
-					width:250,
-					height:200
-				});      
-				var file = this.files[0];
-				var reader = new FileReader();
-
-				reader.onload = function (e) {
-					$(".image-preview-input-title").text("Ganti");
-					$(".image-preview-clear").show();
-					$(".image-preview-filename").val(file.name);
-				}        
-				reader.readAsDataURL(file);
-			});  
-		});
-	</script>
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
-
-    <script>
-		$('#summernote_form').summernote({
-			tabsize: 2,
-			height: 150,
-			toolbar: [
-			['style', ['bold', 'italic', 'underline', 'clear']],
-			['font', ['strikethrough', 'superscript', 'subscript']],
-			['link', ['linkDialogShow', 'unlink']],
+			$.base64ImageToBlob = function(str) {
+				// extract content type and base64 payload from original string
+				var pos = str.indexOf(';base64,');
+				var type = str.substring(5, pos);
+				var b64 = str.substr(pos + 8);
 		
-			],
-			disableDragAndDrop: true,
-			callbacks: {
-				onPaste: function (e) {
-					var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-					e.preventDefault();
-					document.execCommand('insertText', false, bufferText);
+				// decode base64
+				var imageContent = atob(b64);
+		
+				// create an ArrayBuffer and a view (as unsigned 8-bit)
+				var buffer = new ArrayBuffer(imageContent.length);
+				var view = new Uint8Array(buffer);
+		
+				// fill the view, using the decoded base64
+				for (var n = 0; n < imageContent.length; n++) {
+					view[n] = imageContent.charCodeAt(n);
+				}
+		
+				// convert ArrayBuffer to Blob
+				var blob = new Blob([buffer], { type: type });
+		
+				return blob;
+			}
+
+			$.getImage = function(input, croppie) {
+				if (input.files && input.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {  
+						croppie.bind({
+							url: e.target.result,
+						});
+					}
+					reader.readAsDataURL(input.files[0]);
 				}
 			}
-		});
-    </script>
+
+			$("#file-upload").on("change", function(event) {
+				$("#myModal").modal();
+
+				croppie = new Croppie(el, {
+					viewport: {
+						width: 200,
+						height: 200,
+						type: 'square'
+					},
+					boundary: {
+						width: 250,
+						height: 250
+					},
+					enableOrientation: false
+				});
+				$.getImage(event.target, croppie); 
+			});
+
+			$("#upload-photo").on("click", function() {
+				croppie.result('base64').then(function(base64) {
+					$("#myModal").modal("hide"); 
+					$("#profile-pic").attr("src","https://loading.io/spinners/spin/lg.ajax-spinner-gif.gif");
+
+					// $("#profile-pic").attr("src", base64); 
+
+					// $("#submit").on("click", function() {
+					var url = "{{ url('/merchants') }}";
+					var formData = new FormData();
+					formData.append("profile_picture", $.base64ImageToBlob(base64));
+
+					$.ajaxSetup({
+						headers: {
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						}
+					});
+
+					$.ajax({
+						type: 'POST',
+						url: url,
+						data: formData,
+						processData: false,
+						contentType: false,
+						success: function(data) {
+                    if (data == "uploaded") {
+                        $("#profile-pic").attr("src", base64); 
+                    } else {
+                        $("#profile-pic").attr("src","http://riverroadrepair.com/wp-content/uploads/2019/01/logo-placeholder.jpg"); 
+                        console.log(data['profile_picture']);
+                    }
+                },
+                error: function(error) {
+                    console.log(error);
+                    $("#profile-pic").attr("src","http://riverroadrepair.com/wp-content/uploads/2019/01/logo-placeholder.jpg"); 
+                }
+					});
+					// });
+				});
+			});
+
+			$('#myModal').on('hidden.bs.modal', function (e) {
+				setTimeout(function() { croppie.destroy(); }, 100);
+			})
+			});
+	</script>
 @endsection

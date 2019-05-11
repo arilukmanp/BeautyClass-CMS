@@ -21,6 +21,8 @@ class CreateAboutsTable extends Migration
             $table->string('eo_name', 100);
             $table->string('logo');
             $table->text('app_description');
+            $table->date('day1');
+            $table->date('day2');
             $table->timestamps();
         });
     }

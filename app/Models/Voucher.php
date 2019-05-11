@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Voucher extends Model
 {
-    protected $timestamps = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'merchant_id', 'name', 'description', 'expire', 'min_purchase', 'cashback', 'max_cashback', 'photo'

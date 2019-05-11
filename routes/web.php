@@ -1,19 +1,6 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontendController@index');
 
 Route::get('/verify/{token}/{id}', 'Auth\RegisterController@verify_register');
 
@@ -39,7 +26,6 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::group(['prefix' => 'participants'], function () {
         Route::post('/', 'Admin\ParticipantController@store');
-        Route::post('/tesphoto', 'Admin\ParticipantController@tes');
         Route::get('/all', 'Admin\ParticipantController@index_all');
         Route::get('/unregistered', 'Admin\ParticipantController@index_unregistered');
         Route::get('/registered', 'Admin\ParticipantController@index_registered');
@@ -66,7 +52,7 @@ Route::group(['middleware' => 'admin'], function () {
     });
 
     Route::group(['prefix' => 'attendance'], function () {
-        Route::post('/', 'Admin\ScheduleController@store');
+        Route::post('/', 'Admin\AttendanceController@store');
         Route::get('/day1', 'Admin\AttendanceController@index_day1');
         Route::get('/day2', 'Admin\AttendanceController@index_day2');
         Route::get('/create', 'Admin\AttendanceController@create');
@@ -83,5 +69,15 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('gallery', 'Admin\GalleryController');
 
     Route::resource('downloads', 'Admin\DownloadController');
+
+    Route::group(['prefix' => 'setting'], function () {
+        Route::post('/', 'Admin\SettingController@store');
+        Route::get('/day1', 'Admin\SettingController@index');
+        Route::get('/create', 'Admin\SettingController@create');
+        Route::get('/{id}', 'Admin\SettingController@show');
+        Route::put('/{id}', 'Admin\SettingController@update');
+        Route::delete('/{id}', 'Admin\SettingController@destroy');
+        Route::get('/{id}/edit', 'Admin\SettingController@edit');
+    });
 
 });
