@@ -16,7 +16,7 @@ class MerchantController extends Controller
     public function index()
     {
         $ava  = Auth::user()->profile->photo;
-        $data = User::where('role', '2')->get();
+        $data = User::where('role', '2')->orderBy('id', 'desc')->get();
         return view('dashboard.merchant.index', ['merchants' => $data, 'avatar' => $ava]);
     }
 
@@ -36,20 +36,26 @@ class MerchantController extends Controller
 
         // $status = "";
         // $fileName = '';
-        if ($request->hasFile('profile_picture')) {
-            $file     = $request->file('profile_picture');
-            $fileName = Carbon::now()->timestamp . uniqid() . '.' . $file->guessExtension();
-            $file->storeAs('public/profiles', $fileName);
+        // if ($request->hasFile('profile_picture')) {
+        //     $file     = $request->file('profile_picture');
+        //     $fileName = Carbon::now()->timestamp . uniqid() . '.' . $file->guessExtension();
+        //     $file->storeAs('public/profiles', $fileName);
 
             // dd("ok");
             // $status = "uploaded";
             // return response($status,200);
+
+            
+        $this->validate($request, [
+            'email'    => 'required|unique:users'
+        ]);
         
+        $file     = $request->file('photo');
+        $fileName = Carbon::now()->timestamp . uniqid() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('public/merchants', $fileName);
 
         $profile = new Profile;
         $profile->name           = $request->name;
-        $profile->place_of_birth = $request->place_of_birth;
-        $profile->date_of_birth  = $request->date_of_birth;
         $profile->phone          = $request->phone;
         $profile->address        = $request->address;
         $profile->photo          = $fileName;
@@ -63,11 +69,11 @@ class MerchantController extends Controller
         $profile->user()->associate($user);
         $profile->save();
 
-        // Mail::to($user->email)->send(new userRegistered($user));
+        // Mail::to($user->email)->send(new merchantRegistered($user));
         
         return redirect($url)->with('success', 'Berhasil Menambahkan Data');
-        }
-        dd("no photo");
+        // }
+        // dd("no photo");
     }
 
     public function show($id)
@@ -90,6 +96,10 @@ class MerchantController extends Controller
     {
         $url = $request->path();
 
+        $this->validate($request, [
+            'email'    => 'required'
+        ]);
+
         if ($request->hasFile('photo')) {
             $this->validate($request, [
                 'photo'    => 'mimes:jpeg,jpg,png|max:1000'
@@ -97,10 +107,10 @@ class MerchantController extends Controller
 
             $file     = $request->file('photo');
             $fileName = Carbon::now()->timestamp . uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/profiles', $fileName);
+            $file->storeAs('public/merchants', $fileName);
 
             $oldPhoto     = Profile::where('user_id', $id)->value('photo');
-            $oldPhotoPath = '/profiles/'.$oldPhoto;
+            $oldPhotoPath = '/merchants/'.$oldPhoto;
 
             if (Storage::disk('public')->exists($oldPhotoPath)) {
                 Storage::disk('public')->delete($oldPhotoPath);
@@ -113,8 +123,6 @@ class MerchantController extends Controller
 
         $profile = Profile::where('user_id', $id)->first();
         $profile->name           = $request->name;
-        $profile->place_of_birth = $request->place_of_birth;
-        $profile->date_of_birth  = $request->date_of_birth;
         $profile->phone          = $request->phone;
         $profile->address        = $request->address;
         $profile->save();

@@ -70,7 +70,7 @@
 
 @section('script')
     <script src="{{ asset('js/datatables.min.js') }}"></script>
-
+    
     <script>
         $(document).ready( function () {
             $('#myTable').DataTable();
@@ -78,9 +78,9 @@
     </script>
 
     <script>
-		function dodelete()
+        function doConfirm()
 		{
-			job = confirm("Data Merchant Akan Dihapus Secara Permanen. Apakah Anda Yakin?");
+			job = confirm("Apakah Anda Yakin Ingin Menkonfirmasi Pembayaran Peserta ini?");
 			if(job != true)
 			{
 				return false;

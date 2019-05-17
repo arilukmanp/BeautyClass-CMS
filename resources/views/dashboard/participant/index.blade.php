@@ -8,6 +8,10 @@
     @section('title', 'Peserta Belum Membayar')
 @endif
 
+@if(Request::segment(2) == 'confirmation')
+    @section('title', 'Konfirmasi Pembayaran')
+@endif
+
 @if(Request::segment(2) == 'registered')
     @section('title', 'Peserta Telah Terdaftar')
 @endif
@@ -28,6 +32,10 @@
 
                     @if(Request::segment(2) == 'unregistered')
                         <h3>Peserta Yang Belum Membayar</h3>
+                    @endif
+
+                    @if(Request::segment(2) == 'confirmation')
+                        <h3>Konfirmasi Pembayaran Peserta</h3>
                     @endif
 
                     @if(Request::segment(2) == 'registered')
@@ -53,7 +61,9 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nama</th>
-                                <th>Status</th>
+                                @if(Request::segment(2) == 'all') 
+                                    <th>Status</th>
+                                @endif
                                 <th>No. Telepon</th>
                                 <th>Mendaftar Pada</th>
                                 <th>Aksi</th>
@@ -67,20 +77,28 @@
                             <tr>
                                 <td><?= $i; ?></td>
                                 <td><a class="a-user" href="/{{Request::segment(1)}}/{{$user->id}}">{{ $user->profile->name }}</a></td>
-                                <td>
-                                    @if ($user->status == 0)
-                                        {{ 'Unconfirmed' }}
-                                    @elseif ($user->status == 1)
-                                        {{ 'Unpaid' }}
-                                    @else
-                                        {{ 'Paid' }}
-                                    @endif
-                                </td>
+                                @if(Request::segment(2) == 'all') 
+                                    <td>
+                                        @if ($user->status == 0)
+                                            {{ 'Belum Konfirmasi Email' }}
+                                        @elseif ($user->status == 1)
+                                            {{ 'Belum Membayar' }}
+                                        @else
+                                            {{ 'Lunas' }}
+                                        @endif
+                                    </td>
+                                @endif
                                 <td>{{ $user->profile->phone }}</td>
-                                <td>{{ date('d M Y - H:m:s', strtotime($user->created_at)) }}</td>
+                                <td>{{ date('d M Y - H:m', strtotime($user->created_at)) }}</td>
                                 <td>
-                                    <form action="/{{Request::segment(1)}}/{{$user->id}}" method="POST">
-                                        <button type="submit" class="btn btn_red btn-xs" name="submit"" value="delete" data-toggle="tooltip" title="Delete" onClick="return dodelete();"><i class="fas fa-trash"></i> &nbsp; Hapus</button>
+                                    @if(Request::segment(2) == 'confirmation')
+                                        <form action="/{{Request::segment(1)}}/{{$user->id}}" method="POST" style="display: inline-block">
+                                            <button type="submit" class="btn btn-warning btn-xs" name="submit"" value="delete" data-toggle="tooltip" title="Konfirmasi" onClick="return doConfirm();"><i class="fas fa-money-bill-wave"></i> &nbsp; Konfirmasi Pembayaran</button>
+                                            @csrf
+                                        </form>
+                                    @endif
+                                    <form action="/{{Request::segment(1)}}/{{$user->id}}" method="POST" style="display: inline-block">
+                                        <button type="submit" class="btn btn_red btn-xs" name="submit"" value="delete" data-toggle="tooltip" title="Hapus" onClick="return dodelete();"><i class="fas fa-trash"></i> &nbsp; Hapus</button>
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE">
                                     </form>
@@ -111,6 +129,15 @@
 		function dodelete()
 		{
 			job = confirm("Data Peserta Akan Dihapus Secara Permanen. Apakah Anda Yakin?");
+			if(job != true)
+			{
+				return false;
+			}
+        }
+        
+        function doConfirm()
+		{
+			job = confirm("Apakah Anda Yakin Ingin Menkonfirmasi Pembayaran Peserta ini?");
 			if(job != true)
 			{
 				return false;

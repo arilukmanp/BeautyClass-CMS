@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Profile;
+use App\Mail\userRegistered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -23,14 +24,21 @@ class ParticipantController extends Controller
     public function index_unregistered()
     {
         $ava  = Auth::user()->profile->photo;
-        $data = User::where('status', '1')->orderBy('id', 'Desc')->get();
+        $data = User::where([['role', '1'], ['status', '1']])->orderBy('id', 'Desc')->get();
+        return view('dashboard.participant.index', ['participants' => $data, 'avatar' => $ava]);
+    }
+
+    public function index_confirmation()
+    {
+        $ava  = Auth::user()->profile->photo;
+        $data = User::where([['role', '1'], ['status', '1']])->orderBy('id', 'Desc')->get();
         return view('dashboard.participant.index', ['participants' => $data, 'avatar' => $ava]);
     }
 
     public function index_registered()
     {
         $ava  = Auth::user()->profile->photo;
-        $data = User::where('status', '2')->orderBy('id', 'Desc')->get();
+        $data = User::where([['role', '1'], ['status', '2']])->orderBy('id', 'Desc')->get();
         return view('dashboard.participant.index', ['participants' => $data, 'avatar' => $ava]);
     }
 

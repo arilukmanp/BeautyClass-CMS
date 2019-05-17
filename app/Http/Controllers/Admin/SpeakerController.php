@@ -15,7 +15,7 @@ class SpeakerController extends Controller
     {
         $ava  = Auth::user()->profile->photo;
         $data = Speaker::orderBy('id', 'Desc')->get();
-        return view('dashboard.speaker.index', ['speaker' => $data, 'avatar' => $ava]);
+        return view('dashboard.speaker.index', ['speakers' => $data, 'avatar' => $ava]);
     }
 
     public function create()
@@ -28,31 +28,15 @@ class SpeakerController extends Controller
     {
         $url = $request->path();
         
-        $this->validate($request, [
-            'email'    => 'required|unique:users'
-        ]);
-        
         $file     = $request->file('photo');
         $fileName = Carbon::now()->timestamp . uniqid() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('public/profiles', $fileName);
+        $file->storeAs('public/speakers', $fileName);
 
-        $profile = new Profile;
-        $profile->name           = $request->name;
-        $profile->place_of_birth = $request->place_of_birth;
-        $profile->date_of_birth  = $request->date_of_birth;
-        $profile->phone          = $request->phone;
-        $profile->address        = $request->address;
-        $profile->photo          = $fileName;
-        
-        $user           = new User;
-        $user->email    = $request->email;
-        $user->password = bcrypt('beautyclass123');
-        
-        $user->save();
-        $profile->user()->associate($user);
-        $profile->save();
-
-        Mail::to($user->email)->send(new userRegistered($user));
+        Speaker::create([
+            'name'        => $request->name,
+            'photo'       => $fileName,
+            'description' => $request->description
+        ]);
 
         return redirect($url)->with('success', 'Berhasil Menambahkan Data');
     }

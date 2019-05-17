@@ -85,8 +85,9 @@
                                 </a>
                                 <ul class="list-unstyled">
                                     <a class="@if(Request::segment(1) == 'participants') active @endif" @if(Request::segment(1) == 'participants' && Request::segment(2) == 'all') style="color:#ED1262" @endif href="/participants/all">Semua Peserta</a>
-									<a @if(Request::segment(1) == 'participants' && Request::segment(2) == 'unregistered') style="color:#ED1262" @endif href="/participants/unregistered">Peserta Belum Membayar</a>
-									<a @if(Request::segment(1) == 'participants' && Request::segment(2) == 'registered') style="color:#ED1262" @endif href="/participants/registered">Peserta Telah Terdaftar</a>
+									<a @if(Request::segment(1) == 'participants' && Request::segment(2) == 'unregistered') style="color:#ED1262" @endif href="/participants/unregistered">Belum Membayar</a>
+									<a @if(Request::segment(1) == 'participants' && Request::segment(2) == 'confirmation') style="color:#ED1262" @endif href="/participants/confirmation">Konfirmasi Pembayaran</a>
+									<a @if(Request::segment(1) == 'participants' && Request::segment(2) == 'registered') style="color:#ED1262" @endif href="/participants/registered">Telah Terdaftar</a>
                                 </ul>
 							</li>
 							<li>
@@ -180,8 +181,9 @@
 							</a>
 							<ul class="list-unstyled">
 								<a href="/participants/all">Semua Peserta</a>
-								<a href="/participants/unregistered">Peserta Belum Membayar</a>
-								<a href="/participants/registered">Peserta Telah Terdaftar</a>
+								<a href="/participants/unregistered">Belum Membayar</a>
+								<a href="/participants/confirmation">Konfirmasi Pembayaran</a>
+								<a href="/participants/registered">Telah Terdaftar</a>
 							</ul>
 						</li>
 						<li>
@@ -291,6 +293,7 @@
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="{{ asset('js/bootstrap-filestyle.min.js') }}"></script>
 	<script src="{{ asset('js/croppie.js') }}"></script>
 	<script src="{{ asset('js/dashboard-core.js') }}"></script>
 	<script src="{{ asset('js/custom.js') }}"></script>

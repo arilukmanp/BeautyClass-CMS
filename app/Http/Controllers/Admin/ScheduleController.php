@@ -15,41 +15,36 @@ class ScheduleController extends Controller
     {
         $ava  = Auth::user()->profile->photo;
         $data = Schedule::orderBy('for_date', 'Asc')->get();
-        return view('dashboard.schedule.index', ['schedule' => $data, 'avatar' => $ava]);
+        return view('dashboard.schedule.index', ['schedules' => $data, 'avatar' => $ava]);
     }
 
     public function index_day2()
     {
         $ava  = Auth::user()->profile->photo;
         $data = Schedule::orderBy('for_date', 'Asc')->get();
-        return view('dashboard.schedule.index', ['schedule' => $data, 'avatar' => $ava]);
+        return view('dashboard.schedule.index', ['schedules' => $data, 'avatar' => $ava]);
     }
 
     public function create()
     {
+        $ava  = Auth::user()->profile->photo;
+        $data = Speaker::orderBy('name', 'Asc')->get();
+        
+        return view('dashboard.schedule.create', ['speakers' => $data, 'avatar' => $ava]);
+    }
+
+    public function store(Request $request)
+    {
         $url = $request->path();
 
-        if ($url == 'bantul') {
-            $district = '1';
-        }
-        else if ($url == 'gunungkidul') {
-            $district = '2';
-        }
-
-        Destination::create([
+        Schedule::create([
             'speaker_id'  => $request->speaker,
-            'for_date'    => $request->date,
             'category'    => $request->category,
             'name'        => $request->name,
             'description' => $request->description
         ]);
 
         return redirect($url)->with('success', 'Berhasil Menambahkan Data');
-    }
-
-    public function store(Request $request)
-    {
-        //
     }
 
     public function show($id)

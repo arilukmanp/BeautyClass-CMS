@@ -28,6 +28,7 @@ Route::group(['middleware' => 'admin'], function () {
         Route::post('/', 'Admin\ParticipantController@store');
         Route::get('/all', 'Admin\ParticipantController@index_all');
         Route::get('/unregistered', 'Admin\ParticipantController@index_unregistered');
+        Route::get('/confirmation', 'Admin\ParticipantController@index_confirmation');
         Route::get('/registered', 'Admin\ParticipantController@index_registered');
         Route::get('/create', 'Admin\ParticipantController@create');
         Route::get('/{id}', 'Admin\ParticipantController@show');
@@ -63,6 +64,10 @@ Route::group(['middleware' => 'admin'], function () {
     });
 
     Route::resource('vouchers', 'Admin\VoucherController');
+
+    Route::resource('transactions/all', 'Admin\TransactionController');
+
+    Route::resource('transactions/cashback', 'Admin\CashbackController');
 
     Route::resource('coupons', 'Admin\CouponController');
 
