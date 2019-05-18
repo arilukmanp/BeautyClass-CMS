@@ -109,7 +109,8 @@
                                 </a>
                                 <ul class="list-unstyled">
                                     <a class="@if(Request::segment(1) == 'schedule') active @endif" @if(Request::segment(1) == 'schedule' && Request::segment(2) == 'day1') style="color:#ED1262" @endif href="/schedule/day1">Hari Pertama</a>
-                                    <a @if(Request::segment(1) == 'schedule' && Request::segment(2) == 'day2') style="color:#ED1262" @endif href="/schedule/day2">Hari Kedua</a>
+									<a @if(Request::segment(1) == 'schedule' && Request::segment(2) == 'day2') style="color:#ED1262" @endif href="/schedule/day2">Hari Kedua</a>
+									<a @if(Request::segment(1) == 'schedule' && Request::segment(2) == 'category') style="color:#ED1262" @endif href="/schedule/category">Kategori Sesi</a>
                                 </ul>
 							</li>
 							<li class="has_sub">
@@ -206,6 +207,7 @@
 							<ul class="list-unstyled">
 								<a href="/schedule/day1">Hari Pertama</a>
 								<a href="/schedule/day2">Hari Kedua</a>
+								<a href="/schedule/category">Kategori Sesi</a>
 							</ul>
 						</li>
 						<li class="has_sub">

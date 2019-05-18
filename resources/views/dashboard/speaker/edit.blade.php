@@ -1,20 +1,20 @@
 @extends('layouts.master')
 
-@section('title', 'Tambah Peserta')
+@section('title', 'Edit Data Pembicara')
 
 @section('content')
 <div class="block-content">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="block-header bttl">
-				<h3>Tambah Peserta</h3>
+				<h3>Edit Data Pembicara</h3>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<form class="form-horizontal edt" action="/{{Request::segment(1)}}" method="POST" enctype="multipart/form-data">
-
+			<form class="form-horizontal edt" action="/{{Request::segment(1)}}/{{ $speaker->id }}" method="POST" enctype="multipart/form-data">
+				
 				@if(count($errors) > 0)
 					@foreach ($errors->all() as $error)
 						<div class="col-md-12">
@@ -28,40 +28,17 @@
 				
 				<div class="col-md-6">
 					<div class="form-group">
-						<label for="name">Nama Lengkap</label>
-						<input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required autocomplete="off">
-					</div>
-                </div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label for="email">Alamat Email</label>
-						<input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required autocomplete="off">
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label for="place_of_birth">Tempat Lahir</label>
-						<input type="text" class="form-control" id="place_of_birth" name="place_of_birth" value="{{ old('place_of_birth') }}" autocomplete="off">
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label for="date_of_birth">Tanggal Lahir</label>
-						<input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="{{ old('date_of_birth') }}" autocomplete="off">
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label for="phone">Nomor Telepon</label>
-						<input type="number" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" autocomplete="off">
+						<label for="name">Nama Pembicara</label>
+						<input type="text" class="form-control" id="name" name="name" value="{{ $speaker->name }}" required
+							autocomplete="off">
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">
 						<label for="foto">Foto</label>
 						<div class="input-group image-preview">
-							<input type="text" class="form-control image-preview-filename" name="foto" readonly>
-							<span class="input-group-btn">
+							<input type="text" class="form-control image-preview-filename" name="photo_old" value="{{ $speaker->photo }}" readonly>
+								<span class="input-group-btn">
 								<div class="btn btn_red btn-photo-picker image-preview-input">
 									<span class="image-preview-input-title">Pilih Foto</span>
 									<input type="file" accept="image/png, image/jpeg, image/jpg" name="photo">
@@ -70,20 +47,36 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-12">
-					<div class="form-group" style="border-bottom: none">
-						<label for="address">Alamat</label>
-						<textarea class="form-control" id="address" name="address" rows="3">{{ old('address') }}</textarea>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="title">Gelar</label>
+						<input type="text" class="form-control" id="title" name="title" value="{{ $speaker->title }}" required autocomplete="off">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="email">Alamat Email</label>
+						<input type="email" class="form-control" id="email" name="email" value="{{ $speaker->email }}" autocomplete="off">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="phone">Nomor Telepon</label>
+						<input type="tel" class="form-control" id="phone" name="phone" value="{{ $speaker->phone }}" autocomplete="off">
 					</div>
 				</div>
 				<div class="col-md-12">
-					<div class="form-group"></div>
+					<div class="form-group" style="border-bottom: none">
+						<label>Deskripsi</label>
+						<textarea class="form-control" rows="3" name="description">{{ $speaker->description }}</textarea>
+					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-btn">
 						<a href="{{URL::previous()}}" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Batal</a>
-						<button type="submit" class="btn btn-info pull-right" value="upload" name="submit"><i class="fa fa-check"></i> &nbsp; Simpan</button>
+						<button type="submit" class="btn btn-info pull-right" value="edit" name="submit"><i class="fa fa-check"></i> &nbsp; Simpan</button>
 						@csrf
+						<input type="hidden" name="_method" value="PUT">
 					</div>
                 </div>
 			</form>

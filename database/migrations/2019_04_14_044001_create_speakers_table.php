@@ -18,6 +18,9 @@ class CreateSpeakersTable extends Migration
             $table->charset = 'utf8';
             $table->increments('id');
             $table->string('name', 100);
+            $table->string('title');
+            $table->text('address')->nullable();
+            $table->string('phone', 20)->nullable();
             $table->string('photo');
             $table->text('description');
         });

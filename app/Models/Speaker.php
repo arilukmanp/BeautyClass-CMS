@@ -9,7 +9,7 @@ class Speaker extends Model
     public $timestamps = false;
     
     protected $fillable = [
-        'name', 'photo', 'description'
+        'name', 'email', 'phone', 'title', 'photo', 'description'
     ];
 
     public function schedule()

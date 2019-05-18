@@ -39,7 +39,7 @@
 						<div class="input-group image-preview">
 							<input type="text" class="form-control image-preview-filename" name="photo_old" value="{{ $merchant->profile->photo }}" readonly>
 								<span class="input-group-btn">
-								<div class="btn btn-danger image-preview-input">
+								<div class="btn btn_red btn-photo-picker image-preview-input">
 									<span class="image-preview-input-title">Pilih Foto</span>
 									<input type="file" accept="image/png, image/jpeg, image/jpg" name="photo">
 								</div>
@@ -70,8 +70,8 @@
 				<div class="col-md-12">
 					<div class="form-btn">
 						<a href="{{URL::previous()}}" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Batal</a>
-						<button type="submit" class="btn btn-info pull-right" value="edit" name="submit"><i class="fa fa-check"></i> &nbsp; Save</button>
-						{{ csrf_field() }}
+						<button type="submit" class="btn btn-info pull-right" value="edit" name="submit"><i class="fa fa-check"></i> &nbsp; Simpan</button>
+						@csrf
 						<input type="hidden" name="_method" value="PUT">
 					</div>
                 </div>

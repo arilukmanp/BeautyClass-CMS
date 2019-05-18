@@ -62,7 +62,7 @@
 						<div class="input-group image-preview">
 							<input type="text" class="form-control image-preview-filename" name="photo_old" value="{{ $participant->profile->photo }}" readonly>
 							<span class="input-group-btn">
-								<div class="btn btn-danger image-preview-input">
+								<div class="btn btn_red btn-photo-picker image-preview-input">
 									<span class="image-preview-input-title">Pilih Foto</span>
 									<input type="file" accept="image/png, image/jpeg, image/jpg" name="photo">
 								</div>

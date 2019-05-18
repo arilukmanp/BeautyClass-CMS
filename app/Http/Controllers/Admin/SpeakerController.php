@@ -34,6 +34,9 @@ class SpeakerController extends Controller
 
         Speaker::create([
             'name'        => $request->name,
+            'email'       => $request->email,
+            'phone'       => $request->phone,
+            'title'       => $request->title,
             'photo'       => $fileName,
             'description' => $request->description
         ]);
@@ -43,23 +46,20 @@ class SpeakerController extends Controller
 
     public function show($id)
     {
-        $ava  = Auth::user()->profile->photo;
-        $data = User::findOrFail($id);
-
-        return view('dashboard.speaker.single', ['participant' => $data, 'avatar' => $ava]);
+        return abort('404');
     }
 
     public function edit($id)
     {
         $ava  = Auth::user()->profile->photo;
-        $data = User::findOrFail($id);
+        $data = Speaker::findOrFail($id);
 
-        return view('dashboard.speaker.edit', ['participant' => $data, 'avatar' => $ava]);
+        return view('dashboard.speaker.edit', ['speaker' => $data, 'avatar' => $ava]);
     }
 
     public function update(Request $request, $id)
     {
-        $url = $request->path();
+        $url = $request->segment('1');
         
         $this->validate($request, [
             'email'    => 'required'
@@ -72,31 +72,27 @@ class SpeakerController extends Controller
 
             $file     = $request->file('photo');
             $fileName = Carbon::now()->timestamp . uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/profiles', $fileName);
+            $file->storeAs('public/speakers', $fileName);
 
-            $oldPhoto     = Profile::where('user_id', $id)->value('photo');
-            $oldPhotoPath = '/profiles/'.$oldPhoto;
+            $oldPhoto     = Speaker::where('id', $id)->value('photo');
+            $oldPhotoPath = '/speakers/'.$oldPhoto;
 
             if (Storage::disk('public')->exists($oldPhotoPath)) {
                 Storage::disk('public')->delete($oldPhotoPath);
             }
 
-            $profile        = Profile::where('user_id', $id)->first();
-            $profile->photo = $fileName;
-            $profile->save();
+            $speaker        = Speaker::where('user_id', $id)->first();
+            $speaker->photo = $fileName;
+            $speaker->save();
         }
 
-        $profile = Profile::where('user_id', $id)->first();
-        $profile->name           = $request->name;
-        $profile->place_of_birth = $request->place_of_birth;
-        $profile->date_of_birth  = $request->date_of_birth;
-        $profile->phone          = $request->phone;
-        $profile->address        = $request->address;
-        $profile->save();
-        
-        $user        = User::where('id', $id)->first();
-        $user->email = $request->email;
-        $user->save();
+        Speaker::findOrFail($id)->update([
+            'name'        => $request->name,
+            'email'       => $request->email,
+            'phone'       => $request->phone,
+            'title'       => $request->title,
+            'description' => $request->description
+        ]);
 
         return redirect($url)->with('success', 'Berhasil Memperbarui Data');
     }

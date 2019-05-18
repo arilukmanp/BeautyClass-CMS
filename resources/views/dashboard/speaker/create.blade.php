@@ -37,14 +37,32 @@
 				    		<div class="input-group image-preview">
 				    			<input type="text" class="form-control image-preview-filename" name="foto" readonly>
 				    			<span class="input-group-btn">
-				    				<div class="btn btn-danger image-preview-input">
+				    				<div class="btn btn_red btn-photo-picker image-preview-input">
 				    					<span class="image-preview-input-title">Pilih Foto</span>
 				    					<input type="file" accept="image/png, image/jpeg, image/jpg" name="photo">
 				    				</div>
 				    			</span>
 				    		</div>
 				    	</div>
-                    </div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="title">Gelar</label>
+							<input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required autocomplete="off">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="email">Alamat Email</label>
+							<input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" autocomplete="off">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="phone">Nomor Telepon</label>
+							<input type="tel" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" autocomplete="off">
+						</div>
+					</div>
                     <div class="col-md-12">
                         <div class="form-group" style="border-bottom: none">
                             <label>Deskripsi</label>

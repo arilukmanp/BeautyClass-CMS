@@ -78,10 +78,7 @@ class MerchantController extends Controller
 
     public function show($id)
     {
-        $ava  = Auth::user()->profile->photo;
-        $data = User::findOrFail($id);
-
-        return view('dashboard.merchant.single', ['merchant' => $data, 'avatar' => $ava]);
+        return abort('404');
     }
 
     public function edit($id)
@@ -94,7 +91,7 @@ class MerchantController extends Controller
 
     public function update(Request $request, $id)
     {
-        $url = $request->path();
+        $url = $request->segment('1');
 
         $this->validate($request, [
             'email'    => 'required'

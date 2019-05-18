@@ -626,3 +626,11 @@ svg:not(:root) { height: 100% !important; }
 .card-title {
     margin-bottom: .75rem;
 }
+
+.btn-photo-picker {
+	line-height: 1.7;
+}
+
+.modal-header > .close:hover {
+	color: #000;
+}
