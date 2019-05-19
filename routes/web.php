@@ -4,6 +4,10 @@ Route::get('/', 'FrontendController@index');
 
 Route::get('/verify/{token}/{id}', 'Auth\RegisterController@verify_register');
 
+Route::get('/register-status', function() {
+    return view('frontend.register');
+});
+
 Auth::routes();
 
 // Authentication Routes...
@@ -45,6 +49,7 @@ Route::group(['middleware' => 'admin'], function () {
         Route::post('/', 'Admin\ScheduleController@store');
         Route::get('/day1', 'Admin\ScheduleController@index_day1');
         Route::get('/day2', 'Admin\ScheduleController@index_day2');
+        Route::get('/category', 'Admin\ScheduleController@index_category');
         Route::get('/create', 'Admin\ScheduleController@create');
         Route::get('/{id}', 'Admin\ScheduleController@show');
         Route::put('/{id}', 'Admin\ScheduleController@update');

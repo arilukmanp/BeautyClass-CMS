@@ -50,7 +50,7 @@ class ParticipantController extends Controller
 
     public function store(Request $request)
     {
-        $url = $request->path();
+        $url = $request->path()."/all";
         
         $this->validate($request, [
             'email'    => 'required|unique:users'
@@ -71,12 +71,13 @@ class ParticipantController extends Controller
         $user           = new User;
         $user->email    = $request->email;
         $user->password = bcrypt('beautyclass123');
+        $user->token    = str_random(20);
         
         $user->save();
         $profile->user()->associate($user);
         $profile->save();
 
-        Mail::to($user->email)->send(new userRegistered($user));
+        Mail::to($user->email)->queue(new userRegistered($user));
 
         return redirect($url)->with('success', 'Berhasil Menambahkan Data');
     }

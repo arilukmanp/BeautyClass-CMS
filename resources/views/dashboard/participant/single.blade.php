@@ -40,8 +40,8 @@
 					<p class="col-xs-6 col-md-8">@if($participant->profile->place_of_birth == null) - @else {{ $participant->profile->place_of_birth }} @endif</p>
 				</div>
 				<div class="col-md-12 col-xs-12">
-					<label class="col-xs-6 col-md-4">Tanggal Lahir <span style="float:right;">:</span></label>
-					<p class="col-xs-6 col-md-8">@if($participant->profile->date_of_birth == null) - @else {{ date("d F Y", strtotime($participant->profile->date_of_birth)) }} @endif</p>
+					<label class="col-xs-6 col-md-4">Usia <span style="float:right;">:</span></label>
+					<p class="col-xs-6 col-md-8">@if($participant->profile->date_of_birth == null) - @else {{ Carbon\Carbon::parse($participant->profile->date_of_birth)->age . " tahun" }} @endif</p>
 				</div>
 				<div class="col-md-12 col-xs-12">
 					<label class="col-xs-6 col-md-4">Alamat <span style="float:right;">:</span></label>

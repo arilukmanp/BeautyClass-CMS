@@ -8,6 +8,10 @@
     @section('title', 'Jadwal Hari Kedua')
 @endif
 
+@if(Request::segment(2) == 'category')
+    @section('title', 'Kategori Sesi')
+@endif
+
 @section('head')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/datatables.min.css') }}">
 @endsection
@@ -24,6 +28,11 @@
 
                     @if(Request::segment(2) == 'day2')
                         <h3>Jadwal Hari Kedua</h3>
+                        <a href="/{{Request::segment(1)}}/create" class="btn btn_green btn-md pull-right"><i class="fas fa-plus btn-xs"></i> Tambah Data</a>
+                    @endif
+
+                    @if(Request::segment(2) == 'category')
+                        <h3>Kategori Sesi</h3>
                         <a href="/{{Request::segment(1)}}/create" class="btn btn_green btn-md pull-right"><i class="fas fa-plus btn-xs"></i> Tambah Data</a>
                     @endif
                 </div>

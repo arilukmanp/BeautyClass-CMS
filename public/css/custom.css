@@ -3,7 +3,7 @@
 /*======================================================*/
 
 #lg {
-	background: url(../img/frontend/bg-lg.svg) no-repeat center;
+	background: url(../img/bg-lg.svg) no-repeat center;
 	background-size: cover;
 }
 
@@ -103,19 +103,19 @@
 }
 
 .btn-lg {
-	padding: 6px 40px 8px;
-	border-radius: 50px;
-	background-color: #4b3c99;
+	padding: 10px 40px;
+	border-radius: 8px;
+	background-color: #ed015a;
 	font-size: 16px;
 	margin-top: 20px;
 	color: #fff;
-	box-shadow: 1px 2px 12px #8071d4a3;
+	box-shadow: 1px 2px 12px #ed015b5d;
 	cursor: pointer;
 }
 
 .btn-lg:hover {
 	color: #fff;
-	background-color: #342776;
+	background-color: #d30051;
 }
 
 .btn-lg:active, .btn-lg:focus {
@@ -142,7 +142,7 @@
 /*======================================================*/
 
 #lg2 {
-	background: url(../img/frontend/bg-lg.svg) no-repeat fixed center;
+	background: url(../img/bg-lg.svg) no-repeat fixed center;
 	background-size: cover;
 }
 
@@ -168,21 +168,21 @@
 @media only screen and (min-width: 768px) {
 	#lg2 > .container > .row > .col-md-4 {
 		flex: 50%;
-		max-width: 50%;
+		max-width: 55%;
 	}
 }
 
 @media only screen and (min-width: 992px) {
 	#lg2 > .container > .row > .col-md-4 {
 		flex: 40% ;
-		max-width: 40% ;
+		max-width: 45% ;
 	}
 }
 
 @media only screen and (min-width: 1200px) {
 	#lg2 > .container > .row > .col-md-4 {
 		flex: 30% ;
-		max-width: 30% ;
+		max-width: 35% ;
 	}
 }
 
@@ -199,7 +199,7 @@
 .btn-lg2 {
 	margin-top: 30px !important;
 	margin-bottom: 40px;
-	width: 80%;
+	width: 90%;
 }
 
 .zz > p {
@@ -219,6 +219,24 @@
 	opacity: 1;
 }
 
+.btn-link {
+	color: #d30051;
+}
+
+.btn-link:hover {
+	color: #c2004a;
+}
+
+.field-icon {
+	float: right;
+	margin-right: 8px;
+	margin-top: -39px;
+	position: relative;
+	z-index: 2;
+	cursor: pointer;
+	font-size: 13px;
+	color: #89888d;
+}
 
 /*======================================================*/
 /*					End of Login Area					*/

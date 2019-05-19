@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Email Confirmation</title>
+    <title>Email Payment</title>
 </head>
 <body>
     <div width="100%" bgcolor="#f6f9fc" style="margin:0;">
@@ -40,9 +40,13 @@
         <tbody>
         <tr>
         <td style="padding:30px 15px;font-family:sans-serif;font-size:16px;line-height:1.5;color:#555555"><span style="color:#555555;">
-        Hai, terimakasih telah mendaftarkan diri anda dalam acara BeautyClass. Silahkan melakukan konfirmasi email dengan menekan tombol dibawah ini agar data anda dapat kami proses.</span><br><br><br><span style="color:#555555;">
-            <div style="text-align: center"><a style="padding: 12px 20px; background-color: #ed015a; color: #fff; text-decoration: none; border-radius: 5px;" href="{{url('/verify/'.$user->token.'/'.$user->id)}}">Verifikasi Email</a></div>
-        </span><br><br>
+        Hai, terimakasih telah melakukan konfirmasi email. Langkah selanjutnya, silahkan melanjutkan pembayaran pendaftaran sebesar Rp. 250.000,- melalui <u>transfer</u> kesalah satu rekening dibawah ini:</span><br><br><br><span style="color:#555555;">
+            <div style="text-align: center"><div style="width: 50%; display: inline-block;"><b>Bank BCA</b><br><span style="font-size: 12px;">Nomor Rekening:</span><br><span style="color: #dc6a6a; font-size: 20px;"><b>5680079520</b></span><br><span style="font-size: 12px;">a.n. Niken Anjani</span></div><div style="width: 50%; display: inline-block;"><b>Bank BRI</b><br><span style="font-size: 12px;">Nomor Rekening:</span><br><span style="color: #dc6a6a; font-size: 20px;"><b>667501014244538</b></span><br><span style="font-size: 12px;">a.n. Nabila Hasti</span></div></div><br><br>
+            <div style="text-align: center;"><div style="width: 50%; display: inline-block;"><b>Bank BNI</b><br><span style="font-size: 12px;">Nomor Rekening:</span><br><span style="color: #dc6a6a; font-size: 20px;"><b>0682872747</b></span><br><span style="font-size: 12px;">a.n. Deyla Oktaviani</span></div><div style="width: 50%; display: inline-block;"><b>Bank Mandiri</b><br><span style="font-size: 12px;">Nomor Rekening:</span><br><span style="color: #dc6a6a; font-size: 20px;"><b>1110010489397</b></span><br><span style="font-size: 12px;">a.n. Isna Daevi</span></div></div>
+        </span><br><br><span style="color:#555555;">
+        Setelah melakukan transfer, harap segera melakukan konfirmasi pembayaran dengan mengisi form konfirmasi pembayaran yang ada di website. Pembayaran dilakukan <b>maksimal H-3 sebelum acara berlangsung</b>. Untuk informasi dikemudian hari terkait acara, akan kami sampaikan melalui email ini.<br><br>Thanks!
+        </span>
+        <br>
         </td>
         </tr>
         </tbody>

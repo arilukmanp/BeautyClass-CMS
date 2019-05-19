@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Schedule;
+use App\Models\Schedule_category;
 use App\Models\Speaker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,13 @@ class ScheduleController extends Controller
         $ava  = Auth::user()->profile->photo;
         $data = Schedule::orderBy('for_date', 'Asc')->get();
         return view('dashboard.schedule.index', ['schedules' => $data, 'avatar' => $ava]);
+    }
+
+    public function index_category()
+    {
+        $ava  = Auth::user()->profile->photo;
+        $data = Schedule_category::orderBy('id', 'Desc')->get();
+        return view('dashboard.schedule.index', ['categories' => $data, 'avatar' => $ava]);
     }
 
     public function create()

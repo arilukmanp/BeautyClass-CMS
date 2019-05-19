@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Models\Profile;
+use App\Mail\userPayment;
 use Illuminate\Http\Request;
 use App\Mail\userRegistered;
 use App\Http\Controllers\Controller;
@@ -73,7 +74,7 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        return redirect('/login');
+        return redirect('/register-status')->with('warning', '1');
     }
 
 
@@ -98,8 +99,7 @@ class RegisterController extends Controller
         $profile->user()->associate($user);
         $profile->save();
 
-        
-        Mail::to($user->email)->send(new userRegistered($user));
+        Mail::to($user->email)->queue(new userRegistered($user));
     }
 
 
@@ -108,17 +108,18 @@ class RegisterController extends Controller
         $user = User::find($id);
 
         if(!$user){
-            return redirect('login')->with('warning', 'User tidak ditemukan!');
+            return redirect('/register-status')->with('warning', '3');
         }
 
         if($user->token != $token){
-            return redirect('login')->with('warning', 'Token tidak cocok!');
+            return redirect('/register-status')->with('warning', '4');
         }
 
         $user->status = 1;
         $user->save();
 
-        $this->guard()->login($user);
-        return redirect('/home');
+        Mail::to($user->email)->queue(new userPayment($user));
+
+        return redirect('/register-status')->with('warning', '2');
     }
 }
