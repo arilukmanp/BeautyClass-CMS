@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Reg_payment;
 use App\Mail\userRegistered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,7 @@ class ParticipantController extends Controller
     public function index_confirmation()
     {
         $ava  = Auth::user()->profile->photo;
-        $data = User::where([['role', '1'], ['status', '1']])->orderBy('id', 'Desc')->get();
+        $data = Reg_payment::orderBy('id', 'Desc')->get();
         return view('dashboard.participant.index', ['participants' => $data, 'avatar' => $ava]);
     }
 
@@ -90,6 +91,14 @@ class ParticipantController extends Controller
         return view('dashboard.participant.single', ['participant' => $data, 'avatar' => $ava]);
     }
 
+    public function show_confirmation($id)
+    {
+        $ava  = Auth::user()->profile->photo;
+        $data = Reg_payment::findOrFail($id);
+
+        return view('dashboard.participant.single', ['participant' => $data, 'avatar' => $ava]);
+    }
+
     public function edit($id)
     {
         $ava  = Auth::user()->profile->photo;
@@ -140,6 +149,28 @@ class ParticipantController extends Controller
         $user->save();
 
         return redirect($url)->with('success', 'Berhasil Memperbarui Data');
+    }
+
+    public function confirm(Request $request, $id)
+    {
+        $url   = url('/'.$request->segment('1').'/'.$request->segment('2'));
+        // dd($url);
+        $email = Reg_payment::findOrFail($id)->first()->email;
+
+        // dd(User::where('email', $email)->count());
+
+        if (User::where('email', $email)->first() == 0) {
+            return redirect($url)->with('warning', 'Tidak ada data user yang cocok dengan email pengirim');
+        }
+        else {
+            User::where('email', $email)->update([
+                'status' => '2'
+            ]);
+
+            Reg_payment::find($id)->delete();
+            
+            return redirect($url)->with('success', 'Berhasil Mengkonfirmasi Data');
+        }
     }
 
     public function destroy($id)

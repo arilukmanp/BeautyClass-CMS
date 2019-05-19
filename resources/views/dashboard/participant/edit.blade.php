@@ -77,10 +77,13 @@
 					</div>
 				</div>
 				<div class="col-md-12">
+					<div class="form-group"></div>
+				</div>
+				<div class="col-md-12">
 					<div class="form-btn">
 						<a href="{{URL::previous()}}" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Batal</a>
-						<button type="submit" class="btn btn-info pull-right" value="edit" name="submit"><i class="fa fa-check"></i> &nbsp; Save</button>
-						{{ csrf_field() }}
+						<button type="submit" class="btn btn-info pull-right" value="edit" name="submit"><i class="fa fa-check"></i> &nbsp; Simpan</button>
+						@csrf
 						<input type="hidden" name="_method" value="PUT">
 					</div>
                 </div>

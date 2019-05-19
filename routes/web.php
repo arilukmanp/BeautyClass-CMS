@@ -1,6 +1,11 @@
 <?php
 
-Route::get('/', 'FrontendController@index');
+Route::group(['prefix' => '/'], function () {
+    Route::get('/', 'FrontendController@index');
+    Route::post('/payment-confirmation', 'FrontendController@store');
+    Route::get('/payment-confirmation', 'FrontendController@confirmation');
+});
+
 
 Route::get('/verify/{token}/{id}', 'Auth\RegisterController@verify_register');
 
@@ -35,6 +40,8 @@ Route::group(['middleware' => 'admin'], function () {
         Route::get('/confirmation', 'Admin\ParticipantController@index_confirmation');
         Route::get('/registered', 'Admin\ParticipantController@index_registered');
         Route::get('/create', 'Admin\ParticipantController@create');
+        Route::get('/confirmation/{id}', 'Admin\ParticipantController@show_confirmation');
+        Route::put('/confirmation/{id}', 'Admin\ParticipantController@confirm');
         Route::get('/{id}', 'Admin\ParticipantController@show');
         Route::put('/{id}', 'Admin\ParticipantController@update');
         Route::delete('/{id}', 'Admin\ParticipantController@destroy');
@@ -46,12 +53,16 @@ Route::group(['middleware' => 'admin'], function () {
     Route::resource('speakers', 'Admin\SpeakerController');
 
     Route::group(['prefix' => 'schedule'], function () {
-        Route::post('/', 'Admin\ScheduleController@store');
+        Route::post('/day1', 'Admin\ScheduleController@store_day1');
+        Route::post('/day2', 'Admin\ScheduleController@store_day2');
         Route::get('/day1', 'Admin\ScheduleController@index_day1');
         Route::get('/day2', 'Admin\ScheduleController@index_day2');
+        Route::post('/category', 'Admin\ScheduleController@store_category');
         Route::get('/category', 'Admin\ScheduleController@index_category');
-        Route::get('/create', 'Admin\ScheduleController@create');
-        Route::get('/{id}', 'Admin\ScheduleController@show');
+        Route::get('/day1/create', 'Admin\ScheduleController@create');
+        Route::get('/day2/create', 'Admin\ScheduleController@create');
+        Route::get('/category/create', 'Admin\ScheduleController@create_category');
+        Route::delete('/category/{id}', 'Admin\ScheduleController@destroy_category');
         Route::put('/{id}', 'Admin\ScheduleController@update');
         Route::delete('/{id}', 'Admin\ScheduleController@destroy');
         Route::get('/{id}/edit', 'Admin\ScheduleController@edit');

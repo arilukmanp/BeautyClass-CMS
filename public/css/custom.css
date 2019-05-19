@@ -652,3 +652,12 @@ svg:not(:root) { height: 100% !important; }
 .modal-header > .close:hover {
 	color: #000;
 }
+
+#lg2 > #conf-payment {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#lg2 > #conf-payment > .row > .col-md-4 {
+	max-width: 50%;
+}

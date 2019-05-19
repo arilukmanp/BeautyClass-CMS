@@ -17,12 +17,14 @@ class CreateSchedulesTable extends Migration
             $table->collation = 'utf8_general_ci';
             $table->charset = 'utf8';
             $table->increments('id');
-            $table->integer('speaker_id')->length(10)->unsigned();
-            $table->dateTime('for_date');
-            $table->string('category', 50);
+            $table->integer('category_id')->length(10)->unsigned();
+            $table->integer('speaker_id')->length(10)->unsigned()->nullable();
             $table->string('name');
+            $table->time('time');
             $table->text('description');
+            $table->tinyInteger('for_day');
 
+            $table->foreign('category_id')->references('id')->on('schedule_categories');
             $table->foreign('speaker_id')->references('id')->on('speakers');
         });
     }

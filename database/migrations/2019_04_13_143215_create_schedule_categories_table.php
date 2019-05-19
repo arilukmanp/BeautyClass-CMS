@@ -14,9 +14,12 @@ class CreateScheduleCategoriesTable extends Migration
     public function up()
     {
         Schema::create('schedule_categories', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->collation = 'utf8_general_ci';
+            $table->charset = 'utf8';
+            $table->increments('id');
             $table->string('name', 100);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

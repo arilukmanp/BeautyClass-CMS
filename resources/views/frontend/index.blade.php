@@ -59,7 +59,7 @@
 		<div class="row no-gutters slider-text js-fullheight ">
 			<div class="col-md-6 col-lg-4 col-lg-preffix-2 text-center text-lg-right v-middle">
 				<h1 class="text-bold text-uppercase foreground-text relative">Let's Make Today Beautiful</h1>
-				<a href="#" class="btn btn-md btn-default">Register Now</a>
+			<a href="{{ url('/register') }}" class="btn btn-md btn-default">Register Now</a>
 			</div>
 			<h3 class="v">BeautyClass</h3>
 			<h3 class="vr"> Time to get beauty</h3>

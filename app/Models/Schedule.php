@@ -9,8 +9,13 @@ class Schedule extends Model
     public $timestamps = false;
     
     protected $fillable = [
-        'speaker_id', 'for_date', 'category', 'name', 'description'
+        'category_id', 'speaker_id', 'name', 'time', 'description', 'for_day'
     ];
+
+    public function schedule_category()
+    {
+        return $this->belongsTo('App\Models\Schedule_category');
+    }
 
     public function speaker()
     {

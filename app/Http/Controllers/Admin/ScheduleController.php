@@ -15,14 +15,14 @@ class ScheduleController extends Controller
     public function index_day1()
     {
         $ava  = Auth::user()->profile->photo;
-        $data = Schedule::orderBy('for_date', 'Asc')->get();
+        $data = Schedule::where('for_day', '1')->orderBy('time', 'Asc')->get();
         return view('dashboard.schedule.index', ['schedules' => $data, 'avatar' => $ava]);
     }
 
     public function index_day2()
     {
         $ava  = Auth::user()->profile->photo;
-        $data = Schedule::orderBy('for_date', 'Asc')->get();
+        $data = Schedule::where('for_day', '2')->orderBy('time', 'Asc')->get();
         return view('dashboard.schedule.index', ['schedules' => $data, 'avatar' => $ava]);
     }
 
@@ -35,29 +35,61 @@ class ScheduleController extends Controller
 
     public function create()
     {
-        $ava  = Auth::user()->profile->photo;
-        $data = Speaker::orderBy('name', 'Asc')->get();
+        $ava        = Auth::user()->profile->photo;
+        $categories = Schedule_category::orderBy('name', 'Asc')->get();
+        $speakers   = Speaker::orderBy('name', 'Asc')->get();
         
-        return view('dashboard.schedule.create', ['speakers' => $data, 'avatar' => $ava]);
+        return view('dashboard.schedule.create', ['speakers' => $speakers, 'categories' => $categories, 'avatar' => $ava]);
     }
 
-    public function store(Request $request)
+    public function create_category()
+    {
+        $ava = Auth::user()->profile->photo;
+        
+        return view('dashboard.schedule.create', ['avatar' => $ava]);
+    }
+
+    public function store_day1(Request $request)
     {
         $url = $request->path();
 
         Schedule::create([
+            'category_id' => $request->category,
             'speaker_id'  => $request->speaker,
-            'category'    => $request->category,
             'name'        => $request->name,
-            'description' => $request->description
+            'time'        => $request->time,
+            'description' => $request->description,
+            'for_day'     => '1'
         ]);
 
         return redirect($url)->with('success', 'Berhasil Menambahkan Data');
     }
 
-    public function show($id)
+    public function store_day2(Request $request)
     {
-        //
+        $url = $request->path();
+
+        Schedule::create([
+            'category_id' => $request->category,
+            'speaker_id'  => $request->speaker,
+            'name'        => $request->name,
+            'time'        => $request->time,
+            'description' => $request->description,
+            'for_day'     => '2'
+        ]);
+
+        return redirect($url)->with('success', 'Berhasil Menambahkan Data');
+    }
+
+    public function store_category(Request $request)
+    {
+        $url = $request->path();
+
+        Schedule_category::create([
+            'name'        => $request->name
+        ]);
+
+        return redirect($url)->with('success', 'Berhasil Menambahkan Data');
     }
 
     public function edit($id)
@@ -72,6 +104,15 @@ class ScheduleController extends Controller
 
     public function destroy($id)
     {
-        //
+        Schedule::find($id)->delete();
+
+        return back();
+    }
+
+    public function destroy_category($id)
+    {
+        Schedule_category::find($id)->delete();
+
+        return back();
     }
 }
