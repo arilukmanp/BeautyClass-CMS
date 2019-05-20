@@ -14,7 +14,7 @@ class Schedule extends Model
 
     public function schedule_category()
     {
-        return $this->belongsTo('App\Models\Schedule_category');
+        return $this->belongsTo('App\Models\Schedule_category', 'category_id', 'id');
     }
 
     public function speaker()

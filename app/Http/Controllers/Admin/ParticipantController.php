@@ -154,12 +154,12 @@ class ParticipantController extends Controller
     public function confirm(Request $request, $id)
     {
         $url   = url('/'.$request->segment('1').'/'.$request->segment('2'));
-        // dd($url);
-        $email = Reg_payment::findOrFail($id)->first()->email;
+
+        $email = Reg_payment::findOrFail($id)->email;
 
         // dd(User::where('email', $email)->count());
 
-        if (User::where('email', $email)->first() == 0) {
+        if (User::where('email', $email)->count() == 0) {
             return redirect($url)->with('warning', 'Tidak ada data user yang cocok dengan email pengirim');
         }
         else {

@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+
+Route::group(['middleware' => ['api']], function () {
+    
+    Route::post('/auth/signin', 'Api\AuthController@signin');
+
+    Route::group(['middleware' => ['jwt.auth']], function () {
+        
+        Route::get('/user', 'UserController@show');
+        Route::post('/profile', 'ProfileController@create');
+
+    });
 });

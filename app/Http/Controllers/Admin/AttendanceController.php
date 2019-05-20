@@ -15,20 +15,31 @@ class AttendanceController extends Controller
     public function index_day1()
     {
         $ava  = Auth::user()->profile->photo;
-        $data = Presence::orderBy('id', 'Desc')->get();
+        $data = Presence::where('for_day', '1')->orderBy('id', 'Desc')->get();
         return view('dashboard.presence.index', ['presences' => $data, 'avatar' => $ava]);
     }
 
     public function index_day2()
     {
         $ava  = Auth::user()->profile->photo;
-        $data = Presence::orderBy('id', 'Desc')->get();
+        $data = Presence::where('for_day', '2')->orderBy('id', 'Desc')->get();
         return view('dashboard.presence.index', ['presences' => $data, 'avatar' => $ava]);
     }
 
-    public function create()
+    public function attended_day1(Request $id)
     {
-        //
+        return Presence::create([
+            'user_id' => $id,
+            'for_day' => '1'
+        ]);
+    }
+
+    public function attended_day2(Request $id)
+    {
+        return Presence::create([
+            'user_id' => $id,
+            'for_day' => '2'
+        ]);
     }
 
     public function store(Request $request)

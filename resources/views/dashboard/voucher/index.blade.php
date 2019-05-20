@@ -47,9 +47,9 @@
                             <tr>
                                 <td><?= $i; ?></td>
                                 <td>{{ $voucher->name }}</td>
-                                <td>{{ $voucher->merchant_id->name }}</td>
+                                    <td>{{ $voucher->user->profile->name }}</td>
                                 <td>{{ date('d M Y', strtotime($voucher->expire)) }}</td>
-                                <td>{{ $voucher->cashback }}</td>
+                                <td>{{ $voucher->cashback }}%</td>
                                 <td>
                                     <form action="/{{Request::segment(1)}}/{{$voucher->id}}" method="POST">
                                         <button type="submit" class="btn btn_red btn-xs" name="submit"" value="delete" data-toggle="tooltip" title="Delete" onClick="return dodelete();"><i class="fas fa-trash"></i> &nbsp; Hapus</button>
@@ -80,9 +80,9 @@
     </script>
 
     <script>
-        function doConfirm()
+        function dodelete()
 		{
-			job = confirm("Apakah Anda Yakin Ingin Menkonfirmasi Pembayaran Peserta ini?");
+			job = confirm("Data Akan Dihapus Secara Permanen. Apakah Anda Yakin?");
 			if(job != true)
 			{
 				return false;

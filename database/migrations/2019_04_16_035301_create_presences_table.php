@@ -18,7 +18,7 @@ class CreatePresencesTable extends Migration
             $table->charset = 'utf8';
             $table->increments('id');
             $table->integer('user_id')->length(10)->unsigned();
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('for_day');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

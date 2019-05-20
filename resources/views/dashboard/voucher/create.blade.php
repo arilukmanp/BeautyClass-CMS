@@ -72,7 +72,7 @@
 				<div class="col-md-4">
 					<div class="form-group">
 						<label for="cashback">Cashback</label>
-						<input type="text" class="form-control" id="cashback" name="cashback" value="{{ old('cashback') }}" required autocomplete="off">
+						<input type="number" class="form-control" id="cashback" name="cashback" value="{{ old('cashback') }}" required autocomplete="off">
 					</div>
 				</div>
 				<div class="col-md-4">

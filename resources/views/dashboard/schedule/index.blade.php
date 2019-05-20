@@ -63,6 +63,7 @@
                                     <th>Dibuat Pada</th>
                                 @else
                                     <th>Sesi</th>
+                                    <th>Kategori</th>
                                     <th>Waktu</th>
                                     <th>Pembicara</th>
                                 @endif
@@ -99,6 +100,7 @@
                                 <tr>
                                     <td><?= $i; ?></td>
                                     <td>{{ $schedule->name }}</td>
+                                    <td>{{ $schedule->schedule_category->name }}</td>
                                     <td>{{ date('H:m', strtotime($schedule->time)) }} WIB</td>
                                     <td>@if($schedule->speaker_id == null) - @else {{ $schedule->speaker->name }} @endif</td>
                                     <td>

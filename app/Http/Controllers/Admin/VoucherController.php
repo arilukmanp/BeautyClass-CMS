@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Voucher;
@@ -64,6 +65,8 @@ class VoucherController extends Controller
 
     public function destroy($id)
     {
-        //
+        Voucher::find($id)->delete();
+
+        return back();
     }
 }

@@ -14,7 +14,7 @@ class Voucher extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'merchant_id', 'id');
     }
 
     public function cashback()

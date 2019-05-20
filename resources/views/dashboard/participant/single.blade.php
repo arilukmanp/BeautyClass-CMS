@@ -2,9 +2,7 @@
 
 @if(Request::segment(2) == 'confirmation')
     @section('title', 'Detail Konfirmasi')
-@endif
-
-@if(Request::segment(1) == 'participant')
+@else
 	@section('title', 'Profil Peserta')
 @endif
 
@@ -15,9 +13,7 @@
 			<div class="block-header bttl">
 				@if(Request::segment(2) == 'confirmation')
 					<h3>Detail Konfirmasi</h3>
-				@endif
-				
-				@if(Request::segment(1) == 'participant')
+				@else
 					<h3>Profil Peserta</h3>
 					<a href="/{{Request::segment(1)}}/{{$participant->id}}/edit" class="btn btn_yellow btn-md pull-right"><i class="fas fa-pencil-alt btn-xs"></i> Edit Profil</a>
 				@endif
@@ -96,9 +92,7 @@
 					</div>
 				</div>
 			</form>
-		@endif
-
-		@if(Request::segment(1) == 'participant')
+		@else
 			<div class="col-md-10">
 				<div class="row">
 					<div class="col-md-12 col-xs-12">

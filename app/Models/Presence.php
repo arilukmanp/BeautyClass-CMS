@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Presence extends Model
 {
     protected $fillable = [
-        'user_id', 'status'
+        'user_id', 'for_day'
     ];
 
     public function user()
